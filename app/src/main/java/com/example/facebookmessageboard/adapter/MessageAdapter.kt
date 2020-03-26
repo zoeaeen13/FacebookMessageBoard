@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.facebookmessageboard.CommentItem
 import com.example.facebookmessageboard.PostItem
 import com.example.facebookmessageboard.R
+import com.example.facebookmessageboard.api.API
+import kotlinx.android.synthetic.main.activity_message_board.*
 import java.text.SimpleDateFormat
 
 class MessageAdapter(context: Context): RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
@@ -71,10 +74,16 @@ class MessageAdapter(context: Context): RecyclerView.Adapter<MessageAdapter.View
         val recycleviewComments = itemView.findViewById<RecyclerView>(R.id.recycleviewComments)
         val btnToComment = itemView.findViewById<ImageView>(R.id.btnToComment)
         val edtComment = itemView.findViewById<EditText>(R.id.edtComment)
+        val vgMessage = itemView.findViewById<ConstraintLayout>(R.id.vgMessage)
 
         fun bind(position: Int) {
             tvPostUser.text = mMessageList[position].user.name
             tvPostContents.text = mMessageList[position].content
+
+            if(API.token == null) {
+                vgMessage.visibility = View.GONE
+            }
+
 
             //輸入框和留言按鈕設置
             if (isClear == true) {

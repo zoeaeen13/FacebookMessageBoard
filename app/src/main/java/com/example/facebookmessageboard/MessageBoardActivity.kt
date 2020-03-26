@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,10 @@ class MessageBoardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message_board)
+
+        if(API.token == null) {
+            vgToPost.visibility = View.GONE
+        }
 
         mMessageAdapter = MessageAdapter(this)
         recycleviewBoard.layoutManager = LinearLayoutManager(this)

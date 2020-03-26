@@ -16,6 +16,7 @@ import com.example.facebookmessageboard.CommentItem
 import com.example.facebookmessageboard.PostItem
 import com.example.facebookmessageboard.R
 import com.example.facebookmessageboard.ReplyItem
+import com.example.facebookmessageboard.api.API
 import java.text.SimpleDateFormat
 
 class CommentAdapter(context: Context): RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
@@ -58,6 +59,10 @@ class CommentAdapter(context: Context): RecyclerView.Adapter<CommentAdapter.View
             tvCommentUser.text = mCommentList[position].user.name
             tvCommentContents.text = mCommentList[position].content
             tvCommentTime.text = "${setTime(mCommentList[position].created_at)}"
+
+            if(API.token == null) {
+                btnCommentToReply.visibility = View.GONE
+            }
 
             //輸入框和留言按鈕設置
             if (isClear == true) {
