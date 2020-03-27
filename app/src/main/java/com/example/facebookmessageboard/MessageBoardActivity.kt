@@ -26,10 +26,8 @@ class MessageBoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message_board)
 
-        if(API.token == null) {
-            vgToPost.visibility = View.GONE
-        }
 
+        //initialize
         mMessageAdapter = MessageAdapter(this)
         recycleviewBoard.layoutManager = LinearLayoutManager(this)
         recycleviewBoard.adapter = mMessageAdapter
@@ -37,8 +35,25 @@ class MessageBoardActivity : AppCompatActivity() {
         val num = (Math.random()*8).toInt()+1
         imgPostUser.setImageResource(pickImage(num))
 
+        if(API.token == null) {
+            vgToPost.visibility = View.GONE
+            API.apiInterface.getView().enqueue(object: Callback<BoardResponseData>{
+                override fun onFailure(call: Call<BoardResponseData>, t: Throwable) {
 
-        getBoard()
+                }
+                override fun onResponse(call: Call<BoardResponseData>, response: Response<BoardResponseData>) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        val dataList = responseBody!!.posts
+                        val mList = dataList.toMutableList()
+                        mMessageAdapter.updateList(mList)
+                    }
+                }
+            })
+        } else {
+            getBoard()
+        }
+
         setPost()
 
         //登出

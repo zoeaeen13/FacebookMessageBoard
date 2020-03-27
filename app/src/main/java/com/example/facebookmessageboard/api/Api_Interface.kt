@@ -14,7 +14,11 @@ interface Api_Interface {
     @POST("/api/login")
     fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    //拿資料
+    //訪客查看留言版
+    @GET("/api/index")
+    fun getView(): Call<BoardResponseData>
+
+    //登入後留言版
     @GET("/api/board")
     fun getBoard(): Call<BoardResponseData>
 
