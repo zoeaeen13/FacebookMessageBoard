@@ -274,7 +274,11 @@ class MessageAdapter(context: Context): RecyclerView.Adapter<MessageAdapter.View
         val hour = 1000*60*60
         val day = 1000*24*60*60
         if (diff < hour) {
-            return "${(diff/minute).toInt()}分鐘"
+            if ((diff/minute).toInt() == 0){
+                return "剛剛"
+            } else {
+                return "${(diff/minute).toInt()}分鐘"
+            }
         } else if (diff > day) {
             var showMonth = data.substring(5, 7)
             if (showMonth.substring(0,1) == "0")
