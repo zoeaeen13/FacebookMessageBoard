@@ -1,4 +1,7 @@
 ## 挑戰賽：實作留言板
+
+![](https://i.imgur.com/LJq3sYv.gif)
+
 這周接到後端 mentor 突然發布的挑戰賽，要求做出一個仿 Facebook 介面的留言板，功能及要求如下：
 各 camp 拆散分組，和 Backend - Sarah、Web - XTim 及熟悉的夥伴 iOS - Polly 一組。
 
